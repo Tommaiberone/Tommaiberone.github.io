@@ -1,17 +1,21 @@
 <!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>React App</title><script src="https://unpkg.com/react@17/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><link rel="stylesheet" href="./styles.css"><script defer="defer" src="/static/js/main.91fe9252.js"></script><link href="/static/css/main.5fdc1b0d.css" rel="stylesheet"></head><body><div id="root"></div><script type="text/babel">function App() {
+      const [loading, setLoading] = React.useState(false);
+      const [generatedText, setGeneratedText] = React.useState("");
+
       const handleClick = async () => {
-        const apiKey = "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"; // Your API Key
-        const apiUrl = "https://api-inference.huggingface.co/models/gpt2"; // Hugging Face model URL
-        
-        // The input for the model
+        setLoading(true); // Set loading state to true
+        setGeneratedText(""); // Clear any previous text
+
+        const apiKey = "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";
+        const apiUrl = "https://api-inference.huggingface.co/models/gpt2";
+
         const payload = {
-          inputs: "Once upon a time",
+          inputs: "Give me a random idea for a hugely deep ethical dilemma conversation starter.",
           options: {
             wait_for_model: true
           }
         };
 
-        // Set headers for the API call
         const headers = {
           Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json"
@@ -29,16 +33,39 @@
           }
 
           const result = await response.json();
-          alert(`Generated text: ${result[0].generated_text}`);
+          setGeneratedText(result[0].generated_text); // Set the generated text
         } catch (error) {
           console.error("Error during API call:", error);
-          alert("Failed to fetch the generated text. Check the console for details.");
+          setGeneratedText("Failed to fetch the generated text. Try again.");
+        } finally {
+          setLoading(false); // Reset loading state
         }
       };
 
       return (
-        <div className="container">
-          <button onClick={handleClick}>Generate Text</button>
+        <div className="container" style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+          <button 
+            onClick={handleClick} 
+            disabled={loading}
+            style={{
+              padding: "10px 20px",
+              fontSize: "16px",
+              cursor: loading ? "not-allowed" : "pointer",
+              backgroundColor: loading ? "#ccc" : "#007BFF",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              marginBottom: "20px"
+            }}
+          >
+            {loading ? "Loading..." : "Generate Ethical Dilemma"}
+          </button>
+          <div>
+            <h2>Generated Ethical Dilemma:</h2>
+            <p style={{ whiteSpace: "pre-wrap", fontSize: "18px", color: "#333" }}>
+              {generatedText || "Click the button to generate a conversation starter."}
+            </p>
+          </div>
         </div>
       );
     }
