@@ -26,7 +26,7 @@
         const apiUrl = `https://api-inference.huggingface.co/models/google/gemma-2-2b-it`;
 
         const payload = {
-            "inputs": `Provide a single, concise ethical dilemma conversation starter. Limit the response to 50 words or less, ensuring clarity and focus. The response must be cohesive, with no deviations or additional text. Random seed: ${Math.random()}. HERE:\n`,
+            "inputs": `Provide a single, concise ethical dilemma conversation starter. Limit the response to 100 words or less, ensuring clarity and focus. The response must be cohesive, with no deviations or additional text. Random seed: ${Math.random()}. HERE:\n`,
             "parameters": {
                 "temperature": 0.9,
                 "top_p": 0.9
