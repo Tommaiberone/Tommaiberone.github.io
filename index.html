@@ -1,1 +1,13 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>React Aasdsapp</title><script defer="defer" src="/static/js/main.6c2dbe06.js"></script><link href="/static/css/main.5fdc1b0d.css" rel="stylesheet"></head><body><div id="root"></div></body></html>
+<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>React App</title><script src="https://unpkg.com/react@17/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><link rel="stylesheet" href="./styles.css"><script defer="defer" src="/static/js/main.91fe9252.js"></script><link href="/static/css/main.5fdc1b0d.css" rel="stylesheet"></head><body><div id="root"></div><script type="text/babel">function App() {
+      const handleClick = () => {
+        alert("Pulsante cliccato! Esegui la tua azione qui.");
+      };
+
+      return (
+        <div className="container">
+          <button onClick={handleClick}>Cliccami</button>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));</script></body></html>
