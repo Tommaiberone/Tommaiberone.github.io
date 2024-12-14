@@ -1,10 +1,10 @@
-/* Stile generale per il corpo */
+/* Global styles for body */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #74ebd5, #acb6e5);
-  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #f6f8fa;
+  color: #24292e;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,43 +12,61 @@ body {
   overflow: hidden;
 }
 
-/* Contenitore centrale */
+/* Container for the content */
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  max-width: 600px;
+  width: 90%;
   text-align: center;
 }
 
-/* Pulsante centrale */
+/* Button styles */
 button {
-  padding: 20px 40px;
-  font-size: 20px;
-  font-weight: bold;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 600;
   color: #ffffff;
-  background: linear-gradient(135deg, #ff7eb3, #ff758c);
+  background: linear-gradient(135deg, #6f42c1, #5a32a3);
   border: none;
-  border-radius: 30px;
+  border-radius: 6px;
   cursor: pointer;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-/* Effetto hover sul pulsante */
+/* Button hover effect */
 button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #7e56c2, #6741b0);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Focus visibile */
+/* Button focus visible */
 button:focus {
   outline: none;
-  box-shadow: 0 0 0 4px rgba(255, 117, 140, 0.5);
+  box-shadow: 0 0 0 4px rgba(111, 66, 193, 0.3);
 }
 
-/* Stile attivo sul clic */
+/* Button active effect */
 button:active {
-  transform: scale(0.9);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Generated text area */
+.generated-text {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #57606a;
+  text-align: left;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
