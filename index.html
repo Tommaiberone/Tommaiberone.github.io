@@ -53,11 +53,11 @@
           <button onClick={handleClick} disabled={loading}>
             {loading ? "Loading..." : "Generate Ethical Dilemma"}
           </button>
-          {generatedText && (
+          
             <div className="generated-text" dangerouslySetInnerHTML={{ __html: generatedText }}>
               <strong>Generated Ethical Dilemma:</strong>
             </div>
-          )}
+          
         </div>
       );
     }
