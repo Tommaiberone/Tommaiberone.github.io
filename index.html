@@ -35,11 +35,10 @@
 
           const result = await response.json();
           console.log(result[0]);
-          // Convert **tags** to <h2> tags in the text
-          const formattedText = result[0].generated_text;
-          const index = formattedText.indexOf("HERE:");
-          const cleanedText = index !== -1 ? formattedText.substring(index + 5) : formattedText;
-          setGeneratedText(cleanedText);
+        //   const formattedText = result[0].generated_text;
+        //   const index = formattedText.indexOf("HERE:");
+        //   const cleanedText = index !== -1 ? formattedText.substring(index + 5) : formattedText;
+          setGeneratedText(result[0].generated_text);
         } catch (error) {
           console.error("Error during API call:", error);
           setGeneratedText("Failed to fetch the generated text. Try again.");
