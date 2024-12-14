@@ -43,7 +43,7 @@
 
           const result = await response.json();
           // According to the Python example, completion.choices[0].message is where the text is stored.
-          const content = result.choices?.[0]?.message?.content;
+          const content = result.choices[0]?.message?.content;
           if (content) {
             setGeneratedText(content.trim());
           } else {
