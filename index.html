@@ -7,11 +7,11 @@
         setGeneratedText(""); // Clear previous text
 
         const apiKey = "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";
-        const apiUrl = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-1B";
+        const apiUrl = "https://api-inference.huggingface.co/models/OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5";
 
         const payload = {
-          inputs: "Give me a random idea for a hugely deep ethical dilemma conversation starter. Max 50 words.",
-          options: {
+        inputs: "Give me a random idea for a deep ethical dilemma conversation starter, and keep it under 50 words.",
+        options: {
             wait_for_model: true
           }
         };
