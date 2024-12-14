@@ -38,7 +38,11 @@
           const formattedText = result[0].generated_text;
           const index = formattedText.indexOf("HERE:");
           const cleanedText = index !== -1 ? formattedText.substring(index + 5) : formattedText;
-          setGeneratedText(cleanedText);
+          if (cleanedText.length > 0) {
+            setGeneratedText(cleanedText);
+          } else {
+            setGeneratedText(formattedText);
+        }
         } catch (error) {
           console.error("Error during API call:", error);
           setGeneratedText("Failed to fetch the generated text. Try again.");
