@@ -40,13 +40,12 @@
           console.log(result[0]);
           // Convert **tags** to <h2> tags in the text
           const formattedText = result[0].generated_text;
-          setGeneratedText(formattedText);
-        } catch (error) {
-          console.error("Error during API call:", error);
-          setGeneratedText("Failed to fetch the generated text. Try again.");
           const index = formattedText.indexOf("HERE:");
           const cleanedText = index !== -1 ? formattedText.substring(index + 5) : formattedText;
           setGeneratedText(cleanedText);
+        } catch (error) {
+          console.error("Error during API call:", error);
+          setGeneratedText("Failed to fetch the generated text. Try again.");
         } finally {
           setLoading(false);
         }
