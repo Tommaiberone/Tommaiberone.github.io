@@ -6,27 +6,29 @@
         setLoading(true);
         setGeneratedText(""); // Clear previous text
 
-        const apiKey = "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";
-        const apiUrl = `https://api-inference.huggingface.co/models/google/gemma-2-2b-it`;
+        const apiKey = "YOUR_GROQ_API_KEY"; // Replace with your Groq API key
+        const apiUrl = "https://api.groq.com/openai/v1/chat/completions";
 
         const payload = {
-            "inputs": `Provide a single, concise ethical dilemma conversation starter. Limit the response to 50 words or less, ensuring clarity and focus. The response must be cohesive, with no deviations or additional text. Random seed: ${Math.random()}. HERE:\n`,
-            "parameters": {
-                "temperature": 0.99,
-                "top_p": 0.95
-            }
+          model: "llama3-8b-8192",
+          messages: [
+            {
+              role: "user",
+              content: `Provide a single, concise ethical dilemma conversation starter. Limit the response to 100 words or less, ensuring clarity and focus. Random seed: ${Math.random()}.`,
+            },
+          ],
         };
 
         const headers = {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
         };
 
         try {
           const response = await fetch(apiUrl, {
             method: "POST",
             headers: headers,
-            body: JSON.stringify(payload)
+            body: JSON.stringify(payload),
           });
 
           if (!response.ok) {
@@ -34,12 +36,8 @@
           }
 
           const result = await response.json();
-          console.log(result[0]);
-          const formattedText = result[0].generated_text;
-          const index = formattedText.indexOf("HERE:");
-          const cleanedText = index !== -1 ? formattedText.substring(index + 5) : formattedText;
-          console.log(cleanedText.trim());
-        setGeneratedText(cleanedText.trim());
+          const content = result.choices[0].message.content;
+          setGeneratedText(content.trim());
         } catch (error) {
           console.error("Error during API call:", error);
           setGeneratedText("Failed to fetch the generated text. Try again.");
@@ -57,7 +55,7 @@
           {generatedText && (
             <div className="generated-text">
               <strong>Generated Ethical Dilemma:</strong>
-                <p>{generatedText}</p>
+              <p>{generatedText}</p>
             </div>
           )}
         </div>

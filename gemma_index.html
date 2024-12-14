@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethical Dilemma Generator</title>
+  <!-- Include React and ReactDOM from CDN -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- Babel to compile JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    function App() {
+      const [loading, setLoading] = React.useState(false);
+      const [generatedText, setGeneratedText] = React.useState("");
+
+      const handleClick = async () => {
+        setLoading(true);
+        setGeneratedText(""); // Clear previous text
+
+        const apiKey = "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";
+        const apiUrl = `https://api-inference.huggingface.co/models/google/gemma-2-2b-it`;
+
+        const payload = {
+            "inputs": `Provide a single, concise ethical dilemma conversation starter. Limit the response to 50 words or less, ensuring clarity and focus. The response must be cohesive, with no deviations or additional text. Random seed: ${Math.random()}. HERE:\n`,
+            "parameters": {
+                "temperature": 0.9,
+                "top_p": 0.9
+            }
+        };
+
+        const headers = {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+        };
+
+        try {
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const result = await response.json();
+          console.log(result[0]);
+          const formattedText = result[0].generated_text;
+          const index = formattedText.indexOf("HERE:");
+          const cleanedText = index !== -1 ? formattedText.substring(index + 5) : formattedText;
+          console.log(cleanedText.trim());
+        setGeneratedText(cleanedText.trim());
+        } catch (error) {
+          console.error("Error during API call:", error);
+          setGeneratedText("Failed to fetch the generated text. Try again.");
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      return (
+        <div className="container">
+          <h1 style={{ marginBottom: "20px", color: "#24292e" }}>Ethical Dilemma Generator</h1>
+          <button onClick={handleClick} disabled={loading}>
+            {loading ? "Loading..." : "Generate Ethical Dilemma"}
+          </button>
+          {generatedText && (
+            <div className="generated-text">
+              <strong>Generated Ethical Dilemma:</strong>
+                <p>{generatedText}</p>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
