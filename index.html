@@ -1,11 +1,44 @@
 <!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>React App</title><script src="https://unpkg.com/react@17/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><link rel="stylesheet" href="./styles.css"><script defer="defer" src="/static/js/main.91fe9252.js"></script><link href="/static/css/main.5fdc1b0d.css" rel="stylesheet"></head><body><div id="root"></div><script type="text/babel">function App() {
-      const handleClick = () => {
-        alert("Pulsante cliccato! Esegui la tua azione qui.");
+      const handleClick = async () => {
+        const apiKey = "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"; // Your API Key
+        const apiUrl = "https://api-inference.huggingface.co/models/gpt2"; // Hugging Face model URL
+        
+        // The input for the model
+        const payload = {
+          inputs: "Once upon a time",
+          options: {
+            wait_for_model: true
+          }
+        };
+
+        // Set headers for the API call
+        const headers = {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json"
+        };
+
+        try {
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const result = await response.json();
+          alert(`Generated text: ${result[0].generated_text}`);
+        } catch (error) {
+          console.error("Error during API call:", error);
+          alert("Failed to fetch the generated text. Check the console for details.");
+        }
       };
 
       return (
         <div className="container">
-          <button onClick={handleClick}>Cliccami</button>
+          <button onClick={handleClick}>Generate Text</button>
         </div>
       );
     }
