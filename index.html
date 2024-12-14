@@ -39,7 +39,7 @@
           const index = formattedText.indexOf("HERE:");
           const cleanedText = index !== -1 ? formattedText.substring(index + 5) : formattedText;
           console.log(cleanedText.trim());
-            setGeneratedText(cleanedText.trim());
+        setGeneratedText(cleanedText.trim());
         } catch (error) {
           console.error("Error during API call:", error);
           setGeneratedText("Failed to fetch the generated text. Try again.");
@@ -57,6 +57,7 @@
           {generatedText && (
             <div className="generated-text">
               <strong>Generated Ethical Dilemma:</strong>
+                <p>{generatedText}</p>
             </div>
           )}
         </div>
