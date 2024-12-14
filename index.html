@@ -7,20 +7,23 @@
         setGeneratedText(""); // Clear previous text
 
         const apiKey = "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";
-        const apiUrl = "https://api-inference.huggingface.co/models/meta-llama/Llama-2-7b-chat-hf";
+        const apiUrl = "https://api-inference.huggingface.co/chat/completions";
 
+        // We adapt the logic from the Python code here:
+        // Using the chat completions endpoint, we provide a model and messages.
         const payload = {
-          inputs: "Give me a random idea for a deep ethical dilemma conversation starter, and keep it under 50 words.",
-          parameters: {
-            max_new_tokens: 60, // Gives enough room while trying to keep it short
-            temperature: 0.7,
-            top_p: 0.9
-          },
-          options: {
-            wait_for_model: true
-          }
+          model: "meta-llama/Llama-2-7b-chat-hf",
+          messages: [
+            {
+              role: "user",
+              content: "Give me a random idea for a deep ethical dilemma conversation starter, and keep it under 50 words."
+            }
+          ],
+          max_tokens: 60,
+          temperature: 0.7,
+          top_p: 0.9,
+          // If your endpoint supports other parameters, you can include them as needed.
         };
-
 
         const headers = {
           Authorization: `Bearer ${apiKey}`,
@@ -39,7 +42,13 @@
           }
 
           const result = await response.json();
-          setGeneratedText(result[0].generated_text);
+          // According to the Python example, completion.choices[0].message is where the text is stored.
+          const content = result.choices?.[0]?.message?.content;
+          if (content) {
+            setGeneratedText(content.trim());
+          } else {
+            setGeneratedText("No text returned by the model. Check the model and payload.");
+          }
         } catch (error) {
           console.error("Error during API call:", error);
           setGeneratedText("Failed to fetch the generated text. Try again.");
