@@ -38,10 +38,12 @@
           const formattedText = result[0].generated_text;
           const index = formattedText.indexOf("HERE:");
           const cleanedText = index !== -1 ? formattedText.substring(index + 5) : formattedText;
-          console.log(cleanedText);
+          console.log(cleanedText.strip());
           if (cleanedText.length > 0) {
-            setGeneratedText(cleanedText);
+            console.log("DAJE")
+            setGeneratedText(cleanedText.strip());
           } else {
+            console.log("DAJE2")
             setGeneratedText(formattedText);
         }
         } catch (error) {
