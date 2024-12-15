@@ -1,7 +1,7 @@
-<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ethical Dilemma Generator</title><script src="https://unpkg.com/react@17/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><link rel="stylesheet" href="./styles.css"><style>.dark-mode-toggle{position:absolute;top:10px;right:10px;background:0 0;border:none;color:inherit;font-size:14px;cursor:pointer;padding:5px 10px;border-radius:4px;transition:background-color .3s,color .3s}.dark-mode-toggle:hover{background-color:rgba(0,0,0,.1)}body{transition:background-color .3s,color .3s}.container{transition:background-color .3s,color .3s}</style><script defer="defer" src="/static/js/main.91fe9252.js"></script><link href="/static/css/main.58a07328.css" rel="stylesheet"></head><body><div id="root"></div><script type="text/babel">function App() {
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ethical Dilemma Generator</title><script src="https://unpkg.com/react@17/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><style>body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;transition:background-color .3s,color .3s;background-color:#1c1c1e;color:#eaeaea;display:flex;justify-content:center;align-items:center;height:100vh}body.light-mode{background-color:#f6f8fa;color:#24292e}.toggle-container{position:absolute;top:10px;right:10px;display:flex;align-items:center}.toggle-label{margin-right:8px;font-size:14px;font-weight:500}.toggle-switch{position:relative;width:40px;height:20px;background-color:#888;border-radius:50px;cursor:pointer;transition:background-color .3s}.toggle-switch::before{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;background-color:#fff;border-radius:50%;transition:transform .3s}.toggle-switch.active{background-color:#5a5afc}.toggle-switch.active::before{transform:translateX(20px)}.container{background:#2c2c2e;padding:40px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.4);max-width:600px;width:90%;text-align:center;transition:background-color .3s,color .3s}.container.light-mode{background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.12)}button{padding:15px 30px;font-size:16px;font-weight:600;color:#fff;background:linear-gradient(135deg,#5a5afc,#7c79f2);border:none;border-radius:6px;cursor:pointer;box-shadow:0 4px 6px rgba(0,0,0,.1);transition:background-color .2s ease,transform .1s ease}button:hover{background:linear-gradient(135deg,#66f,#8a87f7)}.generated-text{margin-top:20px;padding:20px;background-color:#3a3a3c;border:1px solid #4a4a4c;border-radius:6px;font-size:16px;line-height:1.6;color:#eaeaea;overflow-wrap:break-word;box-shadow:0 4px 6px rgba(0,0,0,.05);transition:background-color .3s,color .3s}.generated-text.light-mode{background-color:#f6f8fa;border-color:#d0d7de;color:#57606a}</style><script defer="defer" src="/static/js/main.91fe9252.js"></script><link href="/static/css/main.58a07328.css" rel="stylesheet"></head><body><div id="root"></div><script type="text/babel">function App() {
       const [loading, setLoading] = React.useState(false);
       const [generatedText, setGeneratedText] = React.useState("");
-      const [isDarkMode, setIsDarkMode] = React.useState(false);
+      const [isDarkMode, setIsDarkMode] = React.useState(true); // Default to dark mode
 
       const handleClick = async () => {
         setLoading(true);
@@ -34,23 +34,27 @@
 
       const toggleDarkMode = () => {
         setIsDarkMode((prevMode) => !prevMode);
-        document.body.classList.toggle("dark-mode"); // Toggle dark mode on the body
+        document.body.classList.toggle("light-mode"); // Toggle light mode class on body
       };
 
       return (
         <>
-          {/* Dark mode toggle button */}
-          <button className="dark-mode-toggle" onClick={toggleDarkMode}>
-            {isDarkMode ? "Light Mode" : "Dark Mode"}
-          </button>
-          
-          <div className="container">
+          {/* Elegant Toggle Switch */}
+          <div className="toggle-container">
+            <span className="toggle-label">{isDarkMode ? "Dark Mode" : "Light Mode"}</span>
+            <div
+              className={`toggle-switch ${isDarkMode ? "active" : ""}`}
+              onClick={toggleDarkMode}
+            ></div>
+          </div>
+
+          <div className={`container ${!isDarkMode ? "light-mode" : ""}`}>
             <h1>Ethical Dilemma Generator</h1>
             <button onClick={handleClick} disabled={loading}>
               {loading ? "Loading..." : "Generate"}
             </button>
             {generatedText && (
-              <div className={`generated-text ${isDarkMode ? "dark-mode" : ""}`}>
+              <div className={`generated-text ${!isDarkMode ? "light-mode" : ""}`}>
                 <strong>Generated Ethical Dilemma:</strong>
                 <p>{generatedText}</p>
               </div>
@@ -60,4 +64,4 @@
       );
     }
 
-    ReactDOM.render(<App />, document.getElementById('root'));</script></body></html>
+    ReactDOM.render(<App />, document.getElementById("root"));</script></body></html>
