@@ -1,6 +1,7 @@
-<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ethical Dilemma Generator</title><script src="https://unpkg.com/react@17/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><link rel="stylesheet" href="./styles.css"><script defer="defer" src="/static/js/main.91fe9252.js"></script><link href="/static/css/main.c2ed8a31.css" rel="stylesheet"></head><body><div id="root"></div><script type="text/babel">function App() {
+<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ethical Dilemma Generator</title><script src="https://unpkg.com/react@17/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><link rel="stylesheet" href="./styles.css"><script defer="defer" src="/static/js/main.91fe9252.js"></script><link href="/static/css/main.58a07328.css" rel="stylesheet"></head><body><div id="root"></div><script type="text/babel">function App() {
       const [loading, setLoading] = React.useState(false);
       const [generatedText, setGeneratedText] = React.useState("");
+      const [isDarkMode, setIsDarkMode] = React.useState(false);
 
       const handleClick = async () => {
         setLoading(true);
@@ -31,14 +32,22 @@
         }
       };
 
+      const toggleDarkMode = () => {
+        setIsDarkMode((prevMode) => !prevMode);
+        document.body.classList.toggle("dark-mode"); // Toggle dark mode on the body
+      };
+
       return (
         <div className="container">
-          <h1 style={{ marginBottom: "20px", color: "#24292e" }}>Ethical Dilemma Generator</h1>
+          <h1>Ethical Dilemma Generator</h1>
+          <button onClick={toggleDarkMode}>
+            Switch to {isDarkMode ? "Light" : "Dark"} Mode
+          </button>
           <button onClick={handleClick} disabled={loading}>
             {loading ? "Loading..." : "Generate"}
           </button>
           {generatedText && (
-            <div className="generated-text">
+            <div className={`generated-text ${isDarkMode ? "dark-mode" : ""}`}>
               <strong>Generated Ethical Dilemma:</strong>
               <p>{generatedText}</p>
             </div>
