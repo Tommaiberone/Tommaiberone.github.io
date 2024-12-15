@@ -3,48 +3,33 @@
       const [generatedText, setGeneratedText] = React.useState("");
 
       const handleClick = async () => {
-      setLoading(true);
-      setGeneratedText(""); // Clear previous text
+        setLoading(true);
+        setGeneratedText(""); // Clear previous text
 
-      const backendUrl = "https://tommaiberone.pythonanywhere.com/generate-dilemma";
+        const backendUrl = "https://tommaiberone.pythonanywhere.com/generate-dilemma";
 
-      const payload = {
-        model: "llama3-8b-8192",
-        messages: [
-          {
-            role: "user",
-            content: `Provide a single, concise ethical dilemma conversation starter.\
-            Limit the response to 100 words or less, ensuring clarity and focus. \
-            No introduction needed, just the dilemma. Close with an explicit question.`,
-          },
-        ],
-      };
+        try {
+          const response = await fetch(backendUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
 
-      try {
-        const response = await fetch(backendUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
 
-        console.log(response)
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          const result = await response.json();
+          const content = result.choices[0].message.content;
+          setGeneratedText(content.trim());
+        } catch (error) {
+          console.error("Error during backend call:", error);
+          setGeneratedText("Failed to fetch the generated text. Try again.");
+        } finally {
+          setLoading(false);
         }
-
-        const result = await response.json();
-        const content = result.choices[0].message.content;
-        setGeneratedText(content.trim());
-      } catch (error) {
-        console.error("Error during backend call:", error);
-        setGeneratedText("Failed to fetch the generated text. Try again.");
-      } finally {
-        setLoading(false);
-      }
-    };
+      };
 
       return (
         <div className="container">
