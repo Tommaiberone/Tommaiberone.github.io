@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ethical Dilemma Generator</title><script src="https://unpkg.com/react@17/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><link rel="stylesheet" href="./styles.css"><script defer="defer" src="/static/js/main.91fe9252.js"></script><link href="/static/css/main.58a07328.css" rel="stylesheet"></head><body><div id="root"></div><script type="text/babel">function App() {
+<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ethical Dilemma Generator</title><script src="https://unpkg.com/react@17/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><link rel="stylesheet" href="./styles.css"><style>.dark-mode-toggle{position:absolute;top:10px;right:10px;background:0 0;border:none;color:inherit;font-size:14px;cursor:pointer;padding:5px 10px;border-radius:4px;transition:background-color .3s,color .3s}.dark-mode-toggle:hover{background-color:rgba(0,0,0,.1)}body{transition:background-color .3s,color .3s}.container{transition:background-color .3s,color .3s}</style><script defer="defer" src="/static/js/main.91fe9252.js"></script><link href="/static/css/main.58a07328.css" rel="stylesheet"></head><body><div id="root"></div><script type="text/babel">function App() {
       const [loading, setLoading] = React.useState(false);
       const [generatedText, setGeneratedText] = React.useState("");
       const [isDarkMode, setIsDarkMode] = React.useState(false);
@@ -38,21 +38,25 @@
       };
 
       return (
-        <div className="container">
-          <h1>Ethical Dilemma Generator</h1>
-          <button onClick={toggleDarkMode}>
-            Switch to {isDarkMode ? "Light" : "Dark"} Mode
+        <>
+          {/* Dark mode toggle button */}
+          <button className="dark-mode-toggle" onClick={toggleDarkMode}>
+            {isDarkMode ? "Light Mode" : "Dark Mode"}
           </button>
-          <button onClick={handleClick} disabled={loading}>
-            {loading ? "Loading..." : "Generate"}
-          </button>
-          {generatedText && (
-            <div className={`generated-text ${isDarkMode ? "dark-mode" : ""}`}>
-              <strong>Generated Ethical Dilemma:</strong>
-              <p>{generatedText}</p>
-            </div>
-          )}
-        </div>
+          
+          <div className="container">
+            <h1>Ethical Dilemma Generator</h1>
+            <button onClick={handleClick} disabled={loading}>
+              {loading ? "Loading..." : "Generate"}
+            </button>
+            {generatedText && (
+              <div className={`generated-text ${isDarkMode ? "dark-mode" : ""}`}>
+                <strong>Generated Ethical Dilemma:</strong>
+                <p>{generatedText}</p>
+              </div>
+            )}
+          </div>
+        </>
       );
     }
 
