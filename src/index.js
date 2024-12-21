@@ -1,16 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
+import './styles.css'; // Import your styles
+import App from './App'; // Import the main App component
 
-function App() {
-  const handleClick = () => {
-    alert("Pulsante cliccato! Esegui la tua azione qui.");
-  };
-
-  return (
-    <div className="container">
-      <button onClick={handleClick}>Cliccami</button>
-    </div>
-  );
-}
-
-ReactDOM.render(<App />, document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
