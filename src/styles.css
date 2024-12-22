@@ -1,163 +1,215 @@
-/* Global styles */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-}
-
-body {
-  margin: 0;
-  padding: 0;
+/**********************************************
+ * Overall Container & Body
+ **********************************************/
+ body {
   font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
   transition: background-color 0.3s, color 0.3s;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  background-color: #121212; /* Dark mode default */
-  color: #f0f0f0; /* Dark mode default */
-}
-
-/* Light Mode Styles */
-body.light-mode {
+  /* Light mode default */
   background-color: #f0f9ff;
   color: #333;
 }
 
-body.light-mode .container {
-  background: linear-gradient(135deg, #f0f9ff, #e0f7fa);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
-}
-
-body.light-mode h1 {
-  color: #333;
-  text-shadow: none;
-}
-
-body.light-mode button {
-  color: #333;
-  background: linear-gradient(45deg, #4dd0e1, #81d4fa);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-body.light-mode button:hover {
-  background: linear-gradient(45deg, #42c2d1, #74c7f0);
-  transform: translateY(-3px);
-}
-
-body.light-mode .generated-text {
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  color: #111;
-  box-shadow: none;
-}
-
-body.light-mode .toggle-container span {
-  color: #333;
-}
-
-body.light-mode .toggle-switch {
-  background-color: #ccc;
-}
-
-body.light-mode .toggle-switch.active {
-  background-color: #999;
-}
-
-/* Dark Mode Styles */
 body.dark-mode {
   background-color: #121212;
   color: #f0f0f0;
 }
 
-body.dark-mode .container {
-  background: linear-gradient(135deg, #23252f, #31343c);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-body.dark-mode h1 {
-  color: #f0f0f0;
-  text-shadow: none;
-}
-
-body.dark-mode button {
-  color: #f0f0f0;
-  background: linear-gradient(45deg, #3f51b5, #6573c3);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-}
-
-body.dark-mode button:hover {
-  background: linear-gradient(45deg, #394aa8, #5b6bb8);
-  transform: translateY(-3px);
-}
-
-body.dark-mode .generated-text {
-  background-color: #2a2a33;
-  border: 1px solid #444;
-  color: #ccc;
-  box-shadow: none;
-}
-
-body.dark-mode .toggle-container span {
-  color: #f0f0f0;
-}
-
-body.dark-mode .toggle-switch {
-  background-color: #666;
-}
-
-body.dark-mode .toggle-switch.active {
-  background-color: #999;
-}
-
-/* Ensure .container does not exceed the viewport */
+/* A subtle gradient for the container in either mode */
 .container {
-  top: 120px;
-  padding: 30px 20px; /* Adjust padding for smaller screens */
+  background: linear-gradient(135deg, #ffe0b2, #ffc107);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 30px 20px;
   border-radius: 25px;
-  max-width: 600px; /* Limite massimo della larghezza */
-  width: calc(100% - 40px); /* Allow for padding on small devices */
+  max-width: 600px;
+  width: calc(100% - 40px);
   text-align: center;
+  margin: 40px auto;
   transition: all 0.3s ease;
-  margin: 20px auto; /* Ensure centered margin */
 }
 
+/* Dark mode container override */
+body.dark-mode .container {
+  background: linear-gradient(135deg, #2a2a33, #3a3a47);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
 
+/**********************************************
+ * Header (title)
+ **********************************************/
 h1 {
   font-size: 36px;
   margin-bottom: 30px;
   transition: color 0.3s;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Button styles */
+/**********************************************
+ * Generate Button & Spinner
+ **********************************************/
+.button-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; 
+}
+
 button {
-  padding: 20px 40px;
+  padding: 16px 32px;
   font-size: 18px;
   font-weight: 600;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  background: linear-gradient(45deg, #3949ab, #5c6bc0);
+}
+
+button:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(45deg, #303f9f, #4b5ca6);
 }
 
 button:active {
   transform: translateY(2px);
 }
 
-/* Generated text area */
+/* Overriding the "Generate New Dilemma" button for clarity if you want */
+.generate-new {
+  margin-top: 20px;
+  background: linear-gradient(45deg, #1976d2, #2196f3);
+}
+.generate-new:hover {
+  background: linear-gradient(45deg, #1565c0, #1e88e5);
+}
+
+/**********************************************
+ * The Ethical Dilemma Text Area
+ **********************************************/
 .generated-text {
   margin-top: 30px;
   padding: 25px;
   border-radius: 12px;
   font-size: 18px;
   line-height: 1.8;
-  transition: all 0.3s ease;
   overflow-wrap: break-word;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+body.dark-mode .generated-text {
+  background-color: #2a2a33;
+  color: #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* Toggle switch container */
+/**********************************************
+ * Yes/No Buttons
+ **********************************************/
+.response-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.yes-button {
+  background: linear-gradient(45deg, #43a047, #66bb6a);
+}
+
+.yes-button:hover {
+  background: linear-gradient(45deg, #388e3c, #5a9f4f);
+}
+
+.no-button {
+  background: linear-gradient(45deg, #e53935, #ef5350);
+}
+
+.no-button:hover {
+  background: linear-gradient(45deg, #d32f2f, #e53935);
+}
+
+/**********************************************
+ * The Tease Text (Shown after user chooses)
+ **********************************************/
+.tease-text {
+  margin-top: 20px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
+  color: #fff;
+  background-color: #ff9800; /* a bright orange that stands out */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+body.dark-mode .tease-text {
+  background-color: #ffa726; /* slightly lighter for contrast */
+  color: #121212;
+}
+
+/**********************************************
+ * Distribution Bar Styles
+ **********************************************/
+.distribution-bar-wrapper {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Labels for each distribution option */
+.distribution-option {
+  margin: 8px 0;
+  font-size: 16px;
+  /* Keep color consistent with theme */
+  color: inherit; 
+}
+
+/* The container of the progress bar */
+.progress-bar-container {
+  width: 80%;
+  height: 24px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  background-color: #ddd;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+body.dark-mode .progress-bar-container {
+  background-color: #444;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Smooth transition for the bar segments */
+.progress-bar-segment {
+  height: 100%;
+  transition: width 0.8s ease-in-out;
+  border-radius: 0; /* Because they're side by side */
+}
+
+/* Make the left segment green, the right segment red */
+.first-segment {
+  background: linear-gradient(45deg, #43a047, #66bb6a);
+}
+.second-segment {
+  background: linear-gradient(45deg, #e53935, #ef5350);
+}
+
+/**********************************************
+ * Toggle Switch (Dark/Light Mode)
+ **********************************************/
 .toggle-container {
   position: fixed;
   top: 20px;
@@ -165,7 +217,6 @@ button:active {
   display: flex;
   align-items: center;
   cursor: pointer;
-  transition: color 0.3s;
   z-index: 1000;
 }
 
@@ -173,7 +224,6 @@ button:active {
   font-size: 18px;
   font-weight: 500;
   margin-right: 10px;
-  transition: color 0.3s;
 }
 
 .toggle-switch {
@@ -181,6 +231,7 @@ button:active {
   height: 20px;
   border-radius: 50px;
   position: relative;
+  background-color: #666;
   transition: background-color 0.3s;
 }
 
@@ -196,127 +247,33 @@ button:active {
   transition: transform 0.3s;
 }
 
+.toggle-switch.active {
+  background-color: #999;
+}
+
 .toggle-switch.active::before {
   transform: translateX(20px);
 }
 
-/* Yes and No Button Styles */
-.yes-button, .no-button {
-  padding: 15px 30px;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  margin: 10px;
-  transition: all 0.2s ease;
-}
-
-.yes-button {
-  background: linear-gradient(45deg, #4caf50, #66bb6a); /* Green gradient */
-  color: white;
-}
-
-.yes-button:hover {
-  background: linear-gradient(45deg, #43a047, #5baa65); /* Darker green */
-  transform: translateY(-3px);
-}
-
-.yes-button:active {
-  transform: translateY(2px);
-}
-
-.no-button {
-  background: linear-gradient(45deg, #f44336, #ef5350); /* Red gradient */
-  color: white;
-}
-
-.no-button:hover {
-  background: linear-gradient(45deg, #d32f2f, #e53935); /* Darker red */
-  transform: translateY(-3px);
-}
-
-.no-button:active {
-  transform: translateY(2px);
-}
-
-/* Center the response buttons */
-.response-buttons {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-/* Tease text styles */
-.tease-text {
-  margin-top: 20px;
-  padding: 15px 20px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  text-align: center;
-  transition: all 0.3s ease;
-  color: #fff;
-}
-
-/* Light Mode Tease Text */
-body.light-mode .tease-text {
-  background-color: #ffee58; /* Yellow for light mode */
-  color: #333;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Dark Mode Tease Text */
-body.dark-mode .tease-text {
-  background-color: #ff9800; /* Orange for dark mode */
-  color: #121212;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-}
-
-.button-spinner-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px; /* Add some spacing between the button and spinner */
-}
-
-.spinner {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  border: 4px solid transparent; /* Transparent borders */
-  border-top: 4px solid #3498db; /* Blue color for the top border */
-  border-radius: 50%; /* Circular shape */
-  animation: spin 1s linear infinite;
-  margin-top: 20px;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Responsive adjustments for small screens */
+/**********************************************
+ * Responsive Adjustments
+ **********************************************/
 @media (max-width: 768px) {
   .container {
-    padding: 20px 15px; /* Smaller padding for smaller screens */
-    width: 90%; /* Adjust width to prevent overflow */
+    padding: 20px 15px;
+    width: 90%;
   }
 
   h1 {
-    font-size: 28px; /* Scale down headings */
+    font-size: 28px;
   }
 
-  button {
-    padding: 15px 30px; /* Adjust button size */
+  .button-spinner-container button {
     font-size: 16px;
+    padding: 12px 24px;
   }
 
   .generated-text {
-    font-size: 16px; /* Adjust font size for text areas */
+    font-size: 16px;
   }
 }
