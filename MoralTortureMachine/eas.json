@@ -7,8 +7,7 @@
     "production": {
       "autoIncrement": true,
       "android": {
-        "buildType": "app-bundle",
-        "gradleCommand": ":app:assembleRelease"
+        "buildType": "app-bundle"
       },
       "distribution": "store"
     }
