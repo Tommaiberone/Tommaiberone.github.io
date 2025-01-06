@@ -1,7 +1,6 @@
 {
-  "name": "MoralTortureMachine",
   "expo": {
-    "name": "main",
+    "name": "MoralTortureMachine",
     "slug": "MoralTortureMachine",
     "version": "1.0.0",
     "orientation": "portrait",
